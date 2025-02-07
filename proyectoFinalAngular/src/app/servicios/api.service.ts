@@ -1,33 +1,40 @@
 import { inject, Injectable } from '@angular/core';
 import { entorno } from '../app.config';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Usuario } from '../modelos/articulo';
+import { Observable, of } from 'rxjs';
+import { Usuario } from '../modelos/Usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+  private usuarios: Usuario[] = [
+    { id: 1, nombreCompleto: 'Juan Pérez', movil: '123456789', correoElectronico: 'juan@example.com', tipoUsuario: 'admin', contrasena: '123456', foto: 'foto1.jpg' },
+    { id: 2, nombreCompleto: 'Ana Gómez', movil: '987654321', correoElectronico: 'ana@example.com', tipoUsuario: 'usuario', contrasena: 'password', foto: 'foto2.jpg' },
+    { id: 3, nombreCompleto: 'Luis Rodríguez', movil: '112233445', correoElectronico: 'luis@example.com', tipoUsuario: 'usuario', contrasena: 'mypassword', foto: 'foto3.jpg' }
+  ];
+
 // URL base de la API concatenada con el endpoint de usuarios
   private apiUrl = entorno.apiUrl + 'usuario'; 
   
 
-// Inyección de dependencia para usar HttpClient
+ // Inyección de dependencia para usar HttpClient
   private http = inject(HttpClient);
 
   constructor() { }
 
   
 
-
-
   /**
   * Obtiene la lista de todos los usuarios desde la API
   * @returns Observable<Usuario[]> - Un array de usuarios en formato observable
   */
   mostrarUsuariosTodos(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}/registrar`);
+    
+     console.log("Obteniendo usuarios desde el servicio...");
+    /* return this.http.get<Usuario[]>(`${this.apiUrl}/registrar`); */
+    return of(this.usuarios);
   }
 
 
@@ -56,8 +63,6 @@ export class ApiService {
 
 
 
-  
-
 
   /**
    * Actualiza un usuario existente enviando los nuevos datos
@@ -78,9 +83,6 @@ export class ApiService {
     return this.http.put(url, null, { params });
   }
   
-
-  
-
 
 
   /**

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../../reutilizar/moduloMaterial';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-formulario-usuario',
@@ -11,7 +12,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class FormularioUsuarioComponent {
 
-  private formBuilder = inject(FormBuilder);
+    private _snackBar = inject(MatSnackBar);
+    private formBuilder = inject(FormBuilder);
+
 
     // Inicializamos el formulario con validaciones
     miFormularioUsuario = this.formBuilder.group({
@@ -23,18 +26,20 @@ export class FormularioUsuarioComponent {
     });
   
 
-  // Método para comprobar si el formulario es válido
-  onSubmit(): void {
-    if (this.miFormularioUsuario.valid) {
-      console.log(this.miFormularioUsuario.value);  // Aquí manejarías la lógica de crear o editar el usuario
-    } else {
-      console.log('Formulario no válido');
+    // Método para comprobar si el formulario es válido
+    onSubmit(): void {
+      if (this.miFormularioUsuario.valid) { 
+        this._snackBar.open('Usuario creado correctamente', 'Ok');
+        console.log(this.miFormularioUsuario.value);  // Aquí manejarías la lógica de crear o editar el usuario
+      } else {
+        console.log('Formulario no válido');
+      }
     }
-  }
 
-  // Método para obtener las validaciones de cada campo
-  get f() {
-    return this.miFormularioUsuario.controls;
-  }
+    
+    // Método para obtener las validaciones de cada campo
+    get f() {
+      return this.miFormularioUsuario.controls;
+    }
 }
 

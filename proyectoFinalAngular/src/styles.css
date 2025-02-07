@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("../public/imganes/fondoPantalla.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+h1 {
+  font-family: 'Pirata One', cursive;
+  color: white;
+  
+}

@@ -1,0 +1,45 @@
+
+/* Contenedor para centrar el formulario en la pantalla */
+.contenedor-formulario {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+
+/* Estilos para el formulario */
+form {
+    display: flex;
+    flex-direction: column; /* Organiza los campos en columna */
+    gap: 16px; /* Espacio entre los elementos */
+    width: 100%;
+    max-width: 400px; /* Define un ancho máximo */
+    padding: 32px;
+    background-image: url("/imganes/madera.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+
+/* Estilo del botón */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+.titulo{
+
+    text-align: center;
+
+}
+
+
+/* Adaptabilidad a pantallas pequeñas */
+@media (max-width: 500px) {
+    form {
+        width: 90%;
+    }
+}
