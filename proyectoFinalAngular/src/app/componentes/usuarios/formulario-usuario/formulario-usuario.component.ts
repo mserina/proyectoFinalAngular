@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../../reutilizar/moduloMaterial';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 
 @Component({
   selector: 'app-formulario-usuario',
   standalone: true,
-  imports: [MaterialModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule, BarraNavegacionComponent],
   templateUrl: './formulario-usuario.component.html',
   styleUrl: './formulario-usuario.component.css'
 })

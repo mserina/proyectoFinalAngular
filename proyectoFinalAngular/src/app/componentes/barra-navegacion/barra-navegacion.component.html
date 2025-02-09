@@ -1,1 +1,30 @@
-<p>barra-navegacion works!</p>
+<div class="barraMeu">
+    <mat-toolbar>
+        <!-- Botón que redirige a una ruta -->
+        <button mat-icon-button [routerLink]="''">
+            <img class="logo" src="/imagenes/logo.png" alt="">
+        </button>
+
+       
+        <button class="ico1" mat-icon-button>
+            <h2>MANGA</h2>
+        </button>
+        <button class="ico2" mat-icon-button>
+            <h2>POSTER</h2>
+        </button>
+        <button class="ico3" mat-icon-button>
+            <h2>FIGURA</h2>
+        </button>
+
+        <div class="logoLog">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <img class="imagenLogin" src="/imagenes/iconoUsuario.png">
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="'usuarios/nuevo'">Registro</button>
+                <button mat-menu-item>Login</button>
+            </mat-menu>
+        </div>
+
+    </mat-toolbar>
+</div>;

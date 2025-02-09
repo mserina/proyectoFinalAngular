@@ -6,7 +6,7 @@ body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-image: url("../public/imganes/fondoPantalla.jpg");
+  background-image: url("/imagenes/fondoPantalla.jpg");
   background-size: cover;
   background-position: center;
 }

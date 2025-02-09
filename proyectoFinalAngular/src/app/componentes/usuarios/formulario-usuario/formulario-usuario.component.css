@@ -15,7 +15,7 @@ form {
     width: 100%;
     max-width: 400px; /* Define un ancho máximo */
     padding: 32px;
-    background-image: url("/imganes/madera.jpg");
+    background-image: url("/imagenes/madera.jpg");
     background-size: cover;
     background-position: center;
     border-radius: 8px; /* Bordes redondeados */
