@@ -3,17 +3,23 @@ import { ApiService } from '../../../servicios/api.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 
 @Component({
   selector: 'app-lista-usuario',
   standalone: true,
-  imports: [RouterLink, MatTableModule, CommonModule],
+  imports: [RouterLink, MatTableModule, CommonModule, BarraNavegacionComponent],
   templateUrl: './lista-usuario.component.html',
   styleUrl: './lista-usuario.component.css',
 })
 export class ListaUsuarioComponent implements OnInit {
+  
   private servicioApi = inject(ApiService);
-  usuarios = new MatTableDataSource<any>();
+  usuarios: any[] = [];
+
+  ngOnInit(): void {
+    this.obtenerUsuarios(); // Asegura que se ejecuta cuando el componente se carga
+  }
 
   // Definir las columnas que se mostrarán en la tabla
   displayedColumns: string[] = [
@@ -21,14 +27,15 @@ export class ListaUsuarioComponent implements OnInit {
     'movil',
     'correoElectronico',
     'tipoUsuario',
-    'foto',
+    'contrasena',
+    'acciones'
   ];
 
   obtenerUsuarios(): void {
     this.servicioApi.mostrarUsuariosTodos().subscribe({
       next: (usuariosGuardados) => {
-        this.usuarios.data = usuariosGuardados;
-        console.log('Usuarios cargados:', this.usuarios.data);
+        this.usuarios = usuariosGuardados;
+        console.log('Usuarios cargados:', this.usuarios);
       },
       error: (error) => {
         console.error('Error al obtener datos:', error);
@@ -39,7 +46,20 @@ export class ListaUsuarioComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.obtenerUsuarios(); // 🔥 Asegura que se ejecuta cuando el componente se carga
+   // Método para eliminar un usuario
+   eliminarUsuario(id: number): void {
+    this.servicioApi.borrarUsuario(id).subscribe(response => {
+      if (response.success) {
+        this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+      }
+    });
   }
+
+  // Método para editar un usuario (puedes agregar la lógica de edición)
+  editarUsuario(id: number): void {
+    console.log('Editar usuario con ID:', id);
+    // Aquí puedes abrir un modal o redirigir a un formulario de edición
+  }
+
+  
 }

@@ -1,38 +1,45 @@
 /* BARRA DE NAVEGACION */
-mat-toolbar{
+mat-toolbar {
     background-color: black;
     height: 5rem;
     color: white;
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
 }
 
-
-.logo{
+/* Logo */
+.logo {
     width: 80px;
     height: 80px;
     transform: translate(1px, -25px);
 }
 
-.ico1{
-    margin-left: 18rem;
-    color: white;
+/* Contenedor de los botones de navegación */
+.navOpciones {
+    display: flex;
+    gap: 20rem; /* Espacio entre los botones */
 }
-.ico2{
-    margin-left: 28rem;
-    color: white;
-}
-.ico3{
-    margin-left: 28rem;
+
+/* Botones de navegación */
+.ico1, .ico2, .ico3 {
     color: white;
 }
 
+/* Sección del icono de usuario */
+.logoLogin {
+    display: flex;
+    margin-right: 1rem;
+}
 
-.imagenLogin{
+/* Imagen del usuario */
+.imagenLogin {
     width: 3rem;
     height: 3rem;
     transform: translateY(-10px);
     border-radius: 2rem;
 }
-.logoLog{
-    margin-left: 28rem;
-    margin-top: 1rem;
+
+h2{
+    font-family: 'Roboto Slab', cursive !important;
+
 }

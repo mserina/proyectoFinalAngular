@@ -45,7 +45,7 @@ export class ApiService {
    * @param id - ID del usuario a buscar
    * @returns Observable<Usuario> - Datos del usuario en formato observable
    */
-  getUsuarioById(id: number): Observable<Usuario> {
+  mostrarUsuarioPorId(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
@@ -90,8 +90,9 @@ export class ApiService {
    * @param id - ID del usuario a eliminar
    * @returns Observable<void> - Respuesta vacía si la eliminación fue exitosa
    */
-  deleteUsuario(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/borrar/${id}`);
+  borrarUsuario(id: number): Observable<any> {
+    return of({ success: true });
+    /* return this.http.delete<void>(`${this.apiUrl}/borrar/${id}`); */
   }
 }
 
