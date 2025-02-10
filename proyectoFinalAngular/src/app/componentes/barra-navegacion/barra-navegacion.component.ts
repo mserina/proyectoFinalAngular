@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class BarraNavegacionComponent {
 
+  mostrarMenu = false; // Inicialmente el menú está oculto
   private router = inject(Router);
 
   irARegistro() {
@@ -25,4 +26,6 @@ export class BarraNavegacionComponent {
   irALogin() {
     this.router.navigate(['/login']); // Cambia la ruta según tu app
   }
+
+  
 }

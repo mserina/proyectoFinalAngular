@@ -33,18 +33,9 @@ export class FormularioUsuarioComponent {
 
     // Método para comprobar si el formulario es válido
     onSubmit(): void {
-      if (this.miFormularioUsuario.valid) {
-        const usuario = this.miFormularioUsuario.value;
-        this.servicioApi.crearNuevoUsuario(usuario).subscribe(
-          (response) => {
-            this._snackBar.open('Usuario creado correctamente', 'Ok');
-            console.log('Usuario creado:', response);  // Aquí manejarías la respuesta de la API
-          },
-          (error) => {
-            this._snackBar.open('Error al crear el usuario', 'Ok');
-            console.error('Error al crear el usuario:', error);  // Manejo de error
-          }
-        );
+      if (this.miFormularioUsuario.valid) { 
+        this._snackBar.open('Usuario creado correctamente', 'Ok');
+        console.log(this.miFormularioUsuario.value);  // Aquí manejarías la lógica de crear o editar el usuario
       } else {
         console.log('Formulario no válido');
       }

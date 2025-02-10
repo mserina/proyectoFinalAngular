@@ -1,40 +1,155 @@
-
+/* --- ESTILOS GENERALES --- */
 mat-toolbar {
     background-color: black;
     height: 5rem;
     color: white;
     display: flex;
     justify-content: space-between; /* Distribuye los elementos */
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 1rem;
 }
 
+/* Logo */
 .logo {
-    width: 80px;
-    height: 80px;
-    transform: translate(1px, -25px);
+    width: 70px;
+    height: 70px;
+    transform: translate(1px, -22px);
 }
 
 /* Contenedor de los botones de navegación */
 .navOpciones {
     display: flex;
-    gap: 20rem; /* Espacio entre los botones */
+    gap: 12rem;
+    margin-left: -52rem;
 }
 
+/* Botones de navegación */
 .ico1, .ico2, .ico3 {
     color: white;
 }
 
+/* Icono del usuario */
 .iconoUsuario {
     display: flex;
     margin-right: 1rem;
 }
 
+/* Imagen del usuario */
 .imagenLogin {
     width: 3rem;
     height: 3rem;
-    transform: translateY(-10px);
     border-radius: 2rem;
+    transform: translateY(-8px);
 }
 
-h2{
+.imagenLogin:hover {
+    transform: scale(1.1);
+}
+
+/* Fuente */
+h2 {
     font-family: 'Roboto Slab', cursive !important;
+    font-size: 1.2rem;
+}
+
+.iconoHamburguesa{
+    display: none;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* TABLETS Y PANTALLAS MEDIANAS (menos de 1024px) */
+@media screen and (max-width: 1024px) {
+    .navOpciones {
+        gap: 5rem; /* Reduce el espacio entre los botones */
+        margin-left: -22rem;
+
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+}
+
+/* DISPOSITIVOS MÓVILES (menos de 768px) */
+@media screen and (max-width: 768px) {
+    mat-toolbar {
+        flex-direction: row;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+        margin-top: 6px;
+    }
+
+    .iconoHamburguesa{
+        display: block;
+    }
+
+    /* MENÚ HAMBURGUESA */
+    .menuHamburguesa {
+        display: block;
+        font-size: 2rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 1rem;
+    }
+
+
+
+    /* Ocultar el menú de navegación por defecto */
+    .navOpciones {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 5rem;
+        left: 0;
+        width: 100%;
+        background-color: black;
+        padding: 1rem;
+        z-index: 100;
+        margin-left: auto;
+    }
+
+    /* Mostrar el menú cuando se active */
+    .navOpciones.mostrar {
+        display: flex;
+    }
+
+    .navOpciones button {
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 1rem;
+    }
+
+    .iconoUsuario {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* PANTALLAS MUY PEQUEÑAS (menos de 480px) */
+@media screen and (max-width: 480px) {
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .imagenLogin {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+   
 }

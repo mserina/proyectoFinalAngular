@@ -1,13 +1,18 @@
-<div class="barraMeu">
+<div class="barraMenu">
   <mat-toolbar>
 
-    <!-- Botón que redirige a una ruta -->
+    <!-- Logo -->
     <button mat-icon-button [routerLink]="''">
-      <img class="logo" src="/imagenes/logo.png" alt="" />
+      <img class="logo" src="/imagenes/logo.png" alt="Logo" />
     </button>
 
-    <!-- Contenedor de los botones de navegación -->
-    <div class="navOpciones">
+    <!-- Menú hamburguesa para móviles -->
+    <button class="menuHamburguesa" mat-icon-button (click)="mostrarMenu = !mostrarMenu">
+      <h1 class="iconoHamburguesa">☰</h1>
+    </button>
+
+    <!-- Contenedor de los botones de navegación (oculto en móviles) -->
+    <div class="navOpciones" [class.mostrar]="mostrarMenu">
       <button class="ico1" mat-icon-button>
         <h2>MANGA</h2>
       </button>
