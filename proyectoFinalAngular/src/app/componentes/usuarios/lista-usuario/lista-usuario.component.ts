@@ -31,6 +31,7 @@ export class ListaUsuarioComponent implements OnInit {
     'acciones'
   ];
 
+  //Metodo para recopilar usuarios
   obtenerUsuarios(): void {
     this.servicioApi.mostrarUsuariosTodos().subscribe({
       next: (usuariosGuardados) => {

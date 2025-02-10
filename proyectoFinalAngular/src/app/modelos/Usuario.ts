@@ -5,7 +5,8 @@ export interface Usuario {
   correoElectronico: string;
   tipoUsuario: string;
   contrasena: string;
-  foto: string;
+  foto?: string;
   token?: string;
   expiracionToken?: string;
 }
+

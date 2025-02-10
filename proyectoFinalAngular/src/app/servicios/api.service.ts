@@ -33,8 +33,8 @@ export class ApiService {
   mostrarUsuariosTodos(): Observable<Usuario[]> {
     
      console.log("Obteniendo usuarios desde el servicio...");
-    /* return this.http.get<Usuario[]>(`${this.apiUrl}/registrar`); */
-    return of(this.usuarios);
+      return this.http.get<any[]>(`${this.apiUrl}/todos`); 
+    /* return of(this.usuarios); */
   }
 
 
@@ -58,7 +58,7 @@ export class ApiService {
    * @returns Observable<Usuario> - Usuario creado con los datos devueltos por la API
    */
   crearNuevoUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiUrl, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/crear`, usuario);
   }
 
 

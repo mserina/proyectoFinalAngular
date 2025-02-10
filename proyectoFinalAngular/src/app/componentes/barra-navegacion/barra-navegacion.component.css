@@ -1,4 +1,4 @@
-/* BARRA DE NAVEGACION */
+
 mat-toolbar {
     background-color: black;
     height: 5rem;
@@ -7,7 +7,6 @@ mat-toolbar {
     justify-content: space-between; /* Distribuye los elementos */
 }
 
-/* Logo */
 .logo {
     width: 80px;
     height: 80px;
@@ -20,18 +19,15 @@ mat-toolbar {
     gap: 20rem; /* Espacio entre los botones */
 }
 
-/* Botones de navegación */
 .ico1, .ico2, .ico3 {
     color: white;
 }
 
-/* Sección del icono de usuario */
-.logoLogin {
+.iconoUsuario {
     display: flex;
     margin-right: 1rem;
 }
 
-/* Imagen del usuario */
 .imagenLogin {
     width: 3rem;
     height: 3rem;
@@ -41,5 +37,4 @@ mat-toolbar {
 
 h2{
     font-family: 'Roboto Slab', cursive !important;
-
 }

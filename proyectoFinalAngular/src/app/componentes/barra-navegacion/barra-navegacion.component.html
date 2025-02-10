@@ -1,5 +1,6 @@
 <div class="barraMeu">
   <mat-toolbar>
+
     <!-- Botón que redirige a una ruta -->
     <button mat-icon-button [routerLink]="''">
       <img class="logo" src="/imagenes/logo.png" alt="" />
@@ -18,7 +19,8 @@
       </button>
     </div>
 
-    <div class="logoLogin">
+    <!-- Icono del usuario -->
+    <div class="iconoUsuario">
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <img class="imagenLogin" src="/imagenes/iconoUsuario.png" />
       </button>
@@ -27,6 +29,6 @@
         <button mat-menu-item>Login</button>
       </mat-menu>
     </div>
+
   </mat-toolbar>
 </div>
-;

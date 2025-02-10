@@ -3,6 +3,7 @@ import { MaterialModule } from '../../../reutilizar/moduloMaterial';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
+import { ApiService } from '../../../servicios/api.service';
 
 @Component({
   selector: 'app-formulario-usuario',
@@ -15,6 +16,9 @@ export class FormularioUsuarioComponent {
 
     private _snackBar = inject(MatSnackBar);
     private formBuilder = inject(FormBuilder);
+    private servicioApi = inject(ApiService);
+
+    
 
 
     // Inicializamos el formulario con validaciones
@@ -29,9 +33,18 @@ export class FormularioUsuarioComponent {
 
     // Método para comprobar si el formulario es válido
     onSubmit(): void {
-      if (this.miFormularioUsuario.valid) { 
-        this._snackBar.open('Usuario creado correctamente', 'Ok');
-        console.log(this.miFormularioUsuario.value);  // Aquí manejarías la lógica de crear o editar el usuario
+      if (this.miFormularioUsuario.valid) {
+        const usuario = this.miFormularioUsuario.value;
+        this.servicioApi.crearNuevoUsuario(usuario).subscribe(
+          (response) => {
+            this._snackBar.open('Usuario creado correctamente', 'Ok');
+            console.log('Usuario creado:', response);  // Aquí manejarías la respuesta de la API
+          },
+          (error) => {
+            this._snackBar.open('Error al crear el usuario', 'Ok');
+            console.error('Error al crear el usuario:', error);  // Manejo de error
+          }
+        );
       } else {
         console.log('Formulario no válido');
       }

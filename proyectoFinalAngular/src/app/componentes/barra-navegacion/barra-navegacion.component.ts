@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../reutilizar/moduloMaterial';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-barra-navegacion',
@@ -11,4 +11,18 @@ import { RouterModule } from '@angular/router';
 })
 export class BarraNavegacionComponent {
 
+  private router = inject(Router);
+
+  irARegistro() {
+    const rutaActual = this.router.url; // Obtiene la ruta actual
+    const rutaDestino = '/usuarios/nuevo';
+
+    if (rutaActual !== rutaDestino) {
+      this.router.navigate([rutaDestino]);
+    }
+  }
+
+  irALogin() {
+    this.router.navigate(['/login']); // Cambia la ruta según tu app
+  }
 }

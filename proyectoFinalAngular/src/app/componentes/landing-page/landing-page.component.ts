@@ -16,13 +16,5 @@ import { BarraNavegacionComponent } from "../barra-navegacion/barra-navegacion.c
 })
 export class LandingPageComponent {
 
-  constructor(private router: Router) {}
-
-  irARegistro() {
-    this.router.navigate(['/usuarios/nuevo']); // Cambia la ruta según tu app
-  }
-
-  irALogin() {
-    this.router.navigate(['/login']); // Cambia la ruta según tu app
-  }
+  
 }
