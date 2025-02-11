@@ -3,11 +3,14 @@ import { entorno } from '../app.config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Usuario } from '../modelos/Usuario';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
+  
 
   private usuarios: Usuario[] = [
     { id: 1, nombreCompleto: 'Juan Pérez', movil: '123456789', correoElectronico: 'juan@example.com', tipoUsuario: 'admin', contrasena: '123456', foto: 'foto1.jpg' },
@@ -45,8 +48,8 @@ export class ApiService {
    * @param id - ID del usuario a buscar
    * @returns Observable<Usuario> - Datos del usuario en formato observable
    */
-  mostrarUsuarioPorId(id: number): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+  mostrarUsuarioPorId(id: number): void {
+     this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
 
@@ -57,8 +60,8 @@ export class ApiService {
    * @param usuario - Objeto con la información del usuario a crear
    * @returns Observable<Usuario> - Usuario creado con los datos devueltos por la API
    */
-  crearNuevoUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/crear`, usuario);
+  crearNuevoUsuario(usuario: Usuario): Observable<any> {
+    return this.http.post<Usuario>(`${this.apiUrl}/crear`, usuario); 
   }
 
 
@@ -91,8 +94,8 @@ export class ApiService {
    * @returns Observable<void> - Respuesta vacía si la eliminación fue exitosa
    */
   borrarUsuario(id: number): Observable<any> {
-    return of({ success: true });
-    /* return this.http.delete<void>(`${this.apiUrl}/borrar/${id}`); */
+    /* return of({ success: true }); */
+    return this.http.delete<void>(`${this.apiUrl}/borrar/${id}`);
   }
 }
 

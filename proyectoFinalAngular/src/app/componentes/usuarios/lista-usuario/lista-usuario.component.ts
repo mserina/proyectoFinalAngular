@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lista-usuario',
@@ -16,6 +17,8 @@ export class ListaUsuarioComponent implements OnInit {
   
   private servicioApi = inject(ApiService);
   usuarios: any[] = [];
+  private _snackBar = inject(MatSnackBar);
+  
 
   ngOnInit(): void {
     this.obtenerUsuarios(); // Asegura que se ejecuta cuando el componente se carga
@@ -31,6 +34,11 @@ export class ListaUsuarioComponent implements OnInit {
     'acciones'
   ];
 
+
+
+
+
+  
   //Metodo para recopilar usuarios
   obtenerUsuarios(): void {
     this.servicioApi.mostrarUsuariosTodos().subscribe({
@@ -47,14 +55,24 @@ export class ListaUsuarioComponent implements OnInit {
     });
   }
 
+
+
+
+
    // Método para eliminar un usuario
    eliminarUsuario(id: number): void {
     this.servicioApi.borrarUsuario(id).subscribe(response => {
       if (response.success) {
         this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+        this._snackBar.open('Usuario ' + id +", eliminado", 'Cerrar', { duration: 3000 });
+
       }
     });
   }
+
+
+
+
 
   // Método para editar un usuario (puedes agregar la lógica de edición)
   editarUsuario(id: number): void {

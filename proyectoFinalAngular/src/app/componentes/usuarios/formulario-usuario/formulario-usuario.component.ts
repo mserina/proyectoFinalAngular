@@ -4,11 +4,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 import { ApiService } from '../../../servicios/api.service';
-
+import { CommonModule } from '@angular/common';
+import { Usuario } from '../../../modelos/Usuario';
 @Component({
   selector: 'app-formulario-usuario',
   standalone: true,
-  imports: [MaterialModule, ReactiveFormsModule, BarraNavegacionComponent],
+  imports: [MaterialModule, ReactiveFormsModule, BarraNavegacionComponent, CommonModule],
   templateUrl: './formulario-usuario.component.html',
   styleUrl: './formulario-usuario.component.css'
 })
@@ -31,12 +32,35 @@ export class FormularioUsuarioComponent {
     });
   
 
-    // Método para comprobar si el formulario es válido
+    // Método para comprobar si el formulario es válido y enviarlo al API
     onSubmit(): void {
       if (this.miFormularioUsuario.valid) { 
-        this._snackBar.open('Usuario creado correctamente', 'Ok');
-        console.log(this.miFormularioUsuario.value);  // Aquí manejarías la lógica de crear o editar el usuario
+        
+        // Obtener los valores del formulario y asignar valores predeterminados si están vacíos
+        const nuevoUsuario: Usuario = {
+          nombreCompleto: this.miFormularioUsuario.value.nombreCompleto || 'Usuario Anónimo',
+          movil: this.miFormularioUsuario.value.movil || '000000000', // Valor predeterminado
+          correoElectronico: this.miFormularioUsuario.value.correoElectronico || 'correo@ejemplo.com',
+          tipoUsuario: this.miFormularioUsuario.value.tipoUsuario || 'usuario',
+          contrasena: this.miFormularioUsuario.value.contrasena || '123456', // Valor predeterminado
+          foto: 'default.jpg', // Se asigna una imagen por defecto
+          expiracionToken: ''
+        };
+
+        // Llamar al servicio para crear un nuevo usuario
+        this.servicioApi.crearNuevoUsuario(nuevoUsuario).subscribe({
+          next: (respuesta) => {
+            console.log('Usuario registrado:', respuesta);
+            this.miFormularioUsuario.reset(); // Resetear el formulario tras el registro
+          },
+          error: (error) => {
+            this._snackBar.open('Error al crear el usuario', 'Cerrar', { duration: 3000 });
+            console.error('Error al registrar usuario:', error);
+          }
+        });
+
       } else {
+        this._snackBar.open('Por favor, completa todos los campos correctamente', 'Cerrar', { duration: 3000 });
         console.log('Formulario no válido');
       }
     }
