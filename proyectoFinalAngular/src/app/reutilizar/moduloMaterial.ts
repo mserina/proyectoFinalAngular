@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'; // Para envol
 import { MatMenuModule } from '@angular/material/menu';          // Para menús (botones con opciones)
 import { MatButtonModule } from '@angular/material/button';      // Para los botones estilizados de Angular Material
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 // Definimos un array que contiene todos los módulos de Angular Material que vamos a usar
@@ -25,7 +26,8 @@ const material = [
   MatSelectModule,     // Módulo de listas desplegables
   MatMenuModule,       // Módulo de menús
   MatButtonModule,     // Módulo de botones
-  MatToolbarModule      
+  MatToolbarModule,     
+  MatDialogModule  
 ];
 
 

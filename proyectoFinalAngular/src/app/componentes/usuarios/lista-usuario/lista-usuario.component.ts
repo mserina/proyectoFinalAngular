@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { FormularioModificarUsuarioComponent } from '../formulario-modificar-usuario/formulario-modificar-usuario.component';
+
 
 @Component({
   selector: 'app-lista-usuario',
@@ -18,6 +21,8 @@ export class ListaUsuarioComponent implements OnInit {
   private servicioApi = inject(ApiService);
   usuarios: any[] = [];
   private _snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
+
   
 
   ngOnInit(): void {
@@ -38,7 +43,7 @@ export class ListaUsuarioComponent implements OnInit {
 
 
 
-  
+
   //Metodo para recopilar usuarios
   obtenerUsuarios(): void {
     this.servicioApi.mostrarUsuariosTodos().subscribe({
@@ -74,11 +79,37 @@ export class ListaUsuarioComponent implements OnInit {
 
 
 
-  // Método para editar un usuario (puedes agregar la lógica de edición)
-  editarUsuario(id: number): void {
-    console.log('Editar usuario con ID:', id);
-    // Aquí puedes abrir un modal o redirigir a un formulario de edición
+  // Método para modificar usuario
+  modificarUsuario(usuario: any): void {
+    // Abrimos el cuadro de diálogo para seleccionar el campo y el nuevo valor
+      const dialogRef = this.dialog.open(FormularioModificarUsuarioComponent, {
+      width: '350px',
+      data: { usuario } // Le pasamos los datos del usuario al diálogo
+    });
+
+    // Cuando el diálogo se cierra, obtenemos el resultado
+    dialogRef.afterClosed().subscribe(resultado => {
+      // Si el usuario ha completado el formulario correctamente
+      if (resultado) { 
+        const { campo, nuevoValor } = resultado; // Obtenemos el campo y el nuevo valor ingresado
+
+        // Llamamos al servicio para modificar el usuario
+        this.servicioApi.modificarUsuario(usuario.correoElectronico, campo, nuevoValor).subscribe({
+          next: () => {
+            // Si todo va bien, mostramos un mensaje de éxito
+            this._snackBar.open('Usuario modificado correctamente', 'Ok', { duration: 3000 });
+            this.obtenerUsuarios(); // Refrescar la lista de usuarios tras la modificación
+          },
+          error: (error) => {
+            // Si hay un error, mostramos un mensaje de error
+            this._snackBar.open('Error al modificar el usuario', 'Cerrar', { duration: 3000 });
+            console.error('Error en modificación:', error);
+          }
+        });
+      }
+    });
   }
+
 
   
 }
