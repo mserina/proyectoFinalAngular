@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../../reutilizar/moduloMaterial';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 import { ApiService } from '../../../servicios/api.service';
 import { CommonModule } from '@angular/common';

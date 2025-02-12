@@ -3,7 +3,6 @@ import { entorno } from '../app.config';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Usuario } from '../modelos/Usuario';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +47,9 @@ export class ApiService {
    * @param id - ID del usuario a buscar
    * @returns Observable<Usuario> - Datos del usuario en formato observable
    */
-  mostrarUsuarioPorId(id: number): void {
-     this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+  mostrarUsuarioPorId(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+     
   }
 
 
@@ -83,6 +83,7 @@ export class ApiService {
       .set('campo', campo)
       .set('nuevoValor', nuevoValor);
   
+      console.log(url, null, { params });
     return this.http.put(url, null, { params });
   }
   

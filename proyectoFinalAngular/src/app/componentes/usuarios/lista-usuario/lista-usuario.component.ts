@@ -81,6 +81,12 @@ export class ListaUsuarioComponent implements OnInit {
 
   // Método para modificar usuario
   modificarUsuario(usuario: any): void {
+    console.log('Usuario recibido en modificarUsuario:', usuario);
+    console.log('Correo electrónico:', usuario?.correoElectronico);
+
+
+
+
     // Abrimos el cuadro de diálogo para seleccionar el campo y el nuevo valor
       const dialogRef = this.dialog.open(FormularioModificarUsuarioComponent, {
       width: '350px',
