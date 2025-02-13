@@ -84,7 +84,7 @@ export class ApiService {
       .set('nuevoValor', nuevoValor);
   
       console.log(url, null, { params });
-    return this.http.put(url, null, { params });
+      return this.http.put(url, null, { params });
   }
   
 

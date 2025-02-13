@@ -6,7 +6,5 @@ export interface Usuario {
   tipoUsuario: string;
   contrasena: string;
   foto?: string;
-  token?: string;
-  expiracionToken?: string;
 }
 

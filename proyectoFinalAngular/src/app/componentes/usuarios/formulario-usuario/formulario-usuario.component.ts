@@ -44,13 +44,12 @@ export class FormularioUsuarioComponent {
           tipoUsuario: this.miFormularioUsuario.value.tipoUsuario || 'usuario',
           contrasena: this.miFormularioUsuario.value.contrasena || '123456', // Valor predeterminado
           foto: 'default.jpg', // Se asigna una imagen por defecto
-          expiracionToken: ''
         };
 
         // Llamar al servicio para crear un nuevo usuario
         this.servicioApi.crearNuevoUsuario(nuevoUsuario).subscribe({
-          next: (respuesta) => {
-            console.log('Usuario registrado:', respuesta);
+          next: () => {
+            this._snackBar.open('Usuario Agregado', 'Cerrar', { duration: 3000 }); 
             this.miFormularioUsuario.reset(); // Resetear el formulario tras el registro
           },
           error: (error) => {

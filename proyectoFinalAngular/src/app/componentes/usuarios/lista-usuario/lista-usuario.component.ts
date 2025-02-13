@@ -67,12 +67,13 @@ export class ListaUsuarioComponent implements OnInit {
    // Método para eliminar un usuario
    eliminarUsuario(id: number): void {
     this.servicioApi.borrarUsuario(id).subscribe(response => {
-      if (response.success) {
-        this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
-        this._snackBar.open('Usuario ' + id +", eliminado", 'Cerrar', { duration: 3000 });
-
+      if (!response) {
+        this._snackBar.open("Usuario eliminado", 'Cerrar', { duration: 3000 });
       }
-    });
+      else{
+        this._snackBar.open('Error al eliminar usuario', 'Cerrar', { duration: 300});
+      }
+    })
   }
 
 
@@ -83,8 +84,6 @@ export class ListaUsuarioComponent implements OnInit {
   modificarUsuario(usuario: any): void {
     console.log('Usuario recibido en modificarUsuario:', usuario);
     console.log('Correo electrónico:', usuario?.correoElectronico);
-
-
 
 
     // Abrimos el cuadro de diálogo para seleccionar el campo y el nuevo valor
@@ -99,17 +98,14 @@ export class ListaUsuarioComponent implements OnInit {
       if (resultado) { 
         const { campo, nuevoValor } = resultado; // Obtenemos el campo y el nuevo valor ingresado
 
+
         // Llamamos al servicio para modificar el usuario
         this.servicioApi.modificarUsuario(usuario.correoElectronico, campo, nuevoValor).subscribe({
           next: () => {
-            // Si todo va bien, mostramos un mensaje de éxito
-            this._snackBar.open('Usuario modificado correctamente', 'Ok', { duration: 3000 });
-            this.obtenerUsuarios(); // Refrescar la lista de usuarios tras la modificación
+            this._snackBar.open("Usuario modificado", 'Cerrar', { duration: 3000 });
           },
           error: (error) => {
-            // Si hay un error, mostramos un mensaje de error
-            this._snackBar.open('Error al modificar el usuario', 'Cerrar', { duration: 3000 });
-            console.error('Error en modificación:', error);
+            this._snackBar.open("Error al modificar usuario", 'Cerrar', { duration: 3000 });
           }
         });
       }
