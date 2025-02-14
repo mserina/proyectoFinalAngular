@@ -23,7 +23,6 @@ export class FormularioModificarUsuarioComponent {
     private data = inject(MAT_DIALOG_DATA);
 
 
- 
   constructor() {
     console.log('Datos recibidos en el diálogo:', this.data); // Verificar qué datos llegan
 
@@ -42,16 +41,14 @@ export class FormularioModificarUsuarioComponent {
     });
   }
 
+
 //Metodo que usa valdiaciones concretas dependiendo del campo que se quiera modificar
 aplicarValidaciones() {
   const campoSeleccionado = this.modificarForm.get('campo')?.value;
   const nuevoValorControl = this.modificarForm.get('nuevoValor');
-  const tipoUsuarioControl = this.modificarForm.get('tipo_usuario');
 
   // Reseteamos las validaciones previas
   nuevoValorControl?.clearValidators();
-  tipoUsuarioControl?.clearValidators(); // Limpiar las validaciones de 'tipo_usuario'
-
 
   // Aplicamos validaciones según el campo seleccionado
   switch (campoSeleccionado) {
@@ -68,20 +65,21 @@ aplicarValidaciones() {
       nuevoValorControl?.setValidators([Validators.required, Validators.minLength(6)]);
       break;
     case 'tipo_usuario':
-      console.log('Tipo de usuario seleccionado:', tipoUsuarioControl);
-      tipoUsuarioControl?.setValidators([Validators.required]);
+      console.log('Tipo de usuario (validaciones) seleccionado:', nuevoValorControl);
+      nuevoValorControl?.setValidators([Validators.required]);
       break;
     default:
       nuevoValorControl?.setValidators([Validators.required]);
   }
   
-  tipoUsuarioControl?.updateValueAndValidity();
+  //Actualiza la validacion
   nuevoValorControl?.updateValueAndValidity();
 }
 
   // Método para confirmar la modificación y cerrar el diálogo
   confirmar(): void {
     if (this.modificarForm.valid) { // Si el formulario es válido
+      console.log('Valor del formulario:', this.modificarForm.value);
       this.dialogoModificar.close(this.modificarForm.value); // Devuelve el valor del formulario al componente principal
     }
   }
