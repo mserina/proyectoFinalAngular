@@ -19,38 +19,24 @@
     </mat-form-field>
 
 
-    <!-- Campo para ingresar el nuevo valor -->
-    <mat-form-field appearance="fill">
-
-      <mat-label *ngIf="modificarForm.get('campo')?.value !== 'tipo_usuario'">Nuevo Valor</mat-label>
-
-      <!-- El input solo se muestra cuando el campo seleccionado no es tipo_usuario -->
-      <input matInput [hidden]="modificarForm.get('campo')?.value === 'tipo_usuario'" formControlName="nuevoValor" required />
-
-
-    <!-- Campo tipo usuario, solo se muestra si 'tipo_usuario' es seleccionado -->
-      <mat-label *ngIf="modificarForm.get('campo')?.value === 'tipo_usuario'">Elige rol</mat-label>
-      <mat-select [hidden]="modificarForm.get('campo')?.value === 'tipo_usuario'" formControlName="tipo_usuario">
-         <mat-option value="admin">Administrador</mat-option>
-         <mat-option value="usuario">Usuario</mat-option>
-      </mat-select>
-
-
-      <!--Mensajes de error por validacion-->
+      <!-- Input de nuevo valor (solo si no es 'tipo_usuario') -->
+    <mat-form-field appearance="fill" *ngIf="modificarForm.get('campo')?.value !== 'tipo_usuario'">
+      <mat-label>Nuevo Valor</mat-label>
+      <input matInput formControlName="nuevoValor" required />
       <mat-error *ngIf="modificarForm.get('nuevoValor')?.hasError('required')">
         Este campo es obligatorio.
       </mat-error>
-      <mat-error *ngIf="modificarForm.get('nuevoValor')?.hasError('maxlength')">
-        Máximo 50 caracteres permitidos.
-      </mat-error>
-      <mat-error *ngIf="modificarForm.get('nuevoValor')?.hasError('email')">
-        Ingrese un correo válido.
-      </mat-error>
-      <mat-error *ngIf="modificarForm.get('nuevoValor')?.hasError('pattern')">
-        Formato incorrecto
-      </mat-error>
-      <mat-error *ngIf="modificarForm.get('nuevoValor')?.hasError('minlength')">
-        La contraseña debe tener al menos 6 caracteres.
+    </mat-form-field>
+
+    <!-- Select de tipo usuario (solo si 'tipo_usuario' es seleccionado) -->
+    <mat-form-field appearance="fill" *ngIf="modificarForm.get('campo')?.value === 'tipo_usuario'">
+      <mat-label>Elige rol</mat-label>
+      <mat-select formControlName="tipo_usuario">
+        <mat-option value="admin">Administrador</mat-option>
+        <mat-option value="usuario">Usuario</mat-option>
+      </mat-select>
+      <mat-error *ngIf="modificarForm.get('tipo_usuario')?.hasError('required')">
+        Debes seleccionar un rol.
       </mat-error>
     </mat-form-field>
 

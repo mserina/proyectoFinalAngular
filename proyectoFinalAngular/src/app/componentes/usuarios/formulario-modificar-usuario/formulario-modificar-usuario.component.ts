@@ -33,6 +33,13 @@ export class FormularioModificarUsuarioComponent {
         nuevoValor: ['', Validators.required], // El nuevo valor que se asignará al campo
         tipo_usuario: ['', Validators.required] // Campo para el "tipo de usuario"
     });
+
+    // Escuchar cambios en tipo_usuario para asegurarnos de que se guarda
+    this.modificarForm.get('tipo_usuario')?.valueChanges.subscribe(value => {
+      console.log('Tipo de usuario seleccionado:', value);
+      this.modificarForm.get('nuevoValor')?.setValue(value);
+
+    });
   }
 
 //Metodo que usa valdiaciones concretas dependiendo del campo que se quiera modificar
@@ -61,7 +68,8 @@ aplicarValidaciones() {
       nuevoValorControl?.setValidators([Validators.required, Validators.minLength(6)]);
       break;
     case 'tipo_usuario':
-      nuevoValorControl?.setValidators([Validators.required]);
+      console.log('Tipo de usuario seleccionado:', tipoUsuarioControl);
+      tipoUsuarioControl?.setValidators([Validators.required]);
       break;
     default:
       nuevoValorControl?.setValidators([Validators.required]);
