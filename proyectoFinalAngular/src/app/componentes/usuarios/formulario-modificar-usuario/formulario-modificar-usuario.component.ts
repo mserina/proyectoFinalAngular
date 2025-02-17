@@ -46,6 +46,7 @@ export class FormularioModificarUsuarioComponent {
 aplicarValidaciones() {
   const campoSeleccionado = this.modificarForm.get('campo')?.value;
   const nuevoValorControl = this.modificarForm.get('nuevoValor');
+  console.log(campoSeleccionado);
 
   // Reseteamos las validaciones previas
   nuevoValorControl?.clearValidators();

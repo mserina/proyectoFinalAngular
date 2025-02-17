@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../../../servicios/api.service';
-import { Router } from '@angular/router';
 import { AuthServiceService } from '../../../servicios/auth-service.service';
+import { MaterialModule } from '../../../reutilizar/moduloMaterial';
+
 
 @Component({
   selector: 'app-login-usuario',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MaterialModule],
   templateUrl: './login-usuario.component.html',
   styleUrl: './login-usuario.component.css'
 })
@@ -16,13 +16,13 @@ export class LoginUsuarioComponent {
 
   loginForm: FormGroup; // Definimos el formulario de login
   private constructorFormulario = inject(FormBuilder);
-  private snackBar = inject(MatSnackBar);
   servicioApi = inject(ApiService);
   usuarios: any[] = [];
   private auth = inject(AuthServiceService);
   
   
   constructor() {
+    
     // Inicializamos el formulario de login
     this.loginForm = this.constructorFormulario.group({
       email: ['', [Validators.required, Validators.email]], // Campo para el email
