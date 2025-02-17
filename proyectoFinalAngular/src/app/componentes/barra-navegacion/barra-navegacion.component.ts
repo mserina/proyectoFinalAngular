@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../reutilizar/moduloMaterial';
 import { Router, RouterModule } from '@angular/router';
+import { AuthServiceService } from '../../servicios/auth-service.service';
 
 @Component({
   selector: 'app-barra-navegacion',
@@ -13,6 +14,7 @@ export class BarraNavegacionComponent {
 
   mostrarMenu = false; // Inicialmente el menú está oculto
   private router = inject(Router);
+  private auth = inject(AuthServiceService);
 
   irARegistro() {
     const rutaActual = this.router.url; // Obtiene la ruta actual
@@ -24,7 +26,17 @@ export class BarraNavegacionComponent {
   }
 
   irALogin() {
-    this.router.navigate(['/login']); // Cambia la ruta según tu app
+    const rutaActual = this.router.url; // Obtiene la ruta actual
+    const rutaDestino = '/usuarios/login';
+
+    if (rutaActual !== rutaDestino) {
+      this.router.navigate([rutaDestino]);
+    }
+  }
+
+  irLogout() {
+    this.auth.logout();
+    
   }
 
   

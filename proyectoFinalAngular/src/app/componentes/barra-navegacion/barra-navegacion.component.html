@@ -31,7 +31,9 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="'usuarios/nuevo'">Registro</button>
-        <button mat-menu-item>Login</button>
+        <button mat-menu-item [routerLink]="'usuarios/login'">Login</button>
+        <button mat-menu-item (click)="irLogout()">Logout</button>
+
       </mat-menu>
     </div>
 
