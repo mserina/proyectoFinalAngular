@@ -1,18 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../../servicios/api.service';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import {  MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FormularioModificarUsuarioComponent } from '../formulario-modificar-usuario/formulario-modificar-usuario.component';
 
-
 @Component({
   selector: 'app-lista-usuario',
   standalone: true,
-  imports: [RouterLink, MatTableModule, CommonModule, BarraNavegacionComponent],
+  imports: [MatTableModule, CommonModule, BarraNavegacionComponent],
   templateUrl: './lista-usuario.component.html',
   styleUrl: './lista-usuario.component.css',
 })
@@ -38,9 +36,6 @@ export class ListaUsuarioComponent implements OnInit {
     'contrasena',
     'acciones'
   ];
-
-
-
 
 
 

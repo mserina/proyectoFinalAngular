@@ -1,8 +1,6 @@
 
 // ---- Este archivo sirve para impirtar modulos de Angular Material ----- //
 
-
-
 // Importamos NgModule desde @angular/core para poder crear un módulo en Angular
 import { NgModule } from '@angular/core';
 
@@ -16,6 +14,10 @@ import { MatMenuModule } from '@angular/material/menu';          // Para menús 
 import { MatButtonModule } from '@angular/material/button';      // Para los botones estilizados de Angular Material
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+
 
 
 // Definimos un array que contiene todos los módulos de Angular Material que vamos a usar
@@ -27,7 +29,10 @@ const material = [
   MatMenuModule,       // Módulo de menús
   MatButtonModule,     // Módulo de botones
   MatToolbarModule,     
-  MatDialogModule  
+  MatDialogModule,
+  MatTableModule, 
+  MatPaginatorModule, 
+  MatSortModule
 ];
 
 

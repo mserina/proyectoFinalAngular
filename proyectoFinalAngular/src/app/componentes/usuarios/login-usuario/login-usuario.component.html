@@ -1,6 +1,21 @@
-<form [formGroup]="loginForm" (ngSubmit)="mandarDatos()">
-    <input formControlName="email" type="email" placeholder="Email" />
-    <input formControlName="password" type="password" placeholder="Password" />
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+<div class="contenedor-formulario">
+
+  <form [formGroup]="loginForm" (ngSubmit)="mandarDatos()">
+    
+    <h1 class="titulo">LOGIN</h1>
+
+    <mat-form-field appearance="fill">
+      <mat-label type="email" placeholder="Email">Email</mat-label>
+      <input matInput formControlName="email" placeholder="Introduce email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label type="password" placeholder="Password">Contraseña</mat-label>
+      <input matInput formControlName="password" placeholder="Introduce contraseña">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+
   </form>
+</div>
   
