@@ -30,7 +30,7 @@ export class AuthServiceService {
             console.log('✅ Usuario autenticado:', usuarioEncontrado);
             this.usuarioAutenticado = usuarioEncontrado;
             localStorage.setItem('usuario', JSON.stringify(usuarioEncontrado)); // Guardamos en localStorage
-            this.router.navigate(['/landing']); // Redirigir a la página protegida
+            this.router.navigate(['']); // Redirigir a la página protegida
             resolve(true);
           } else {
             console.log('❌ Usuario no encontrado. Credenciales incorrectas.');
@@ -53,7 +53,7 @@ export class AuthServiceService {
     console.log("usuario " + this.usuarioAutenticado + " eliminado");
     this.usuarioAutenticado = null; // Eliminamos el usuario autenticado
     localStorage.removeItem('usuario'); // Eliminamos la información del usuario del localStorage
-    this.router.navigate(['usuarios/login']); // Redirigimos al login
+    this.router.navigate(['login']); // Redirigimos al login
   }
 
 
@@ -65,5 +65,11 @@ export class AuthServiceService {
     console.log("aqui esta gurdado, " + localStorage.getItem('usuario'));
     return !!localStorage.getItem('usuario'); // Retorna `true` si hay un usuario en el localStorage
   }
+  
+
+  isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('usuario') || '{}');
+    return user && user.tipoUsuario === 'admin';  // Verifica si el tipo de usuario es admin  
+    }
 }
 

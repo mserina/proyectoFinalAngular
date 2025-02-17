@@ -30,8 +30,9 @@
         <img class="imagenLogin" src="/imagenes/iconoUsuario.png" />
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="'usuarios/nuevo'">Registro</button>
-        <button mat-menu-item [routerLink]="'usuarios/login'">Login</button>
+        <button mat-menu-item *ngIf="auth.isAdmin()" [routerLink]="'/admin'">Lista de Usuarios</button>
+        <button mat-menu-item [routerLink]="'nuevo'">Registro</button>
+        <button mat-menu-item [routerLink]="'login'">Login</button>
         <button mat-menu-item (click)="irLogout()">Logout</button>
 
       </mat-menu>

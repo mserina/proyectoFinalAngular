@@ -11,7 +11,7 @@ export const loginGuard: CanActivateFn = (route, state) => {
     return true; // Permite el acceso si el usuario está autenticado
   } else {
     console.log('❌ Acceso denegado. Redirigiendo al login...');
-    router.navigate(['usuarios/login']); // Redirige a login si no está autenticado
+    router.navigate(['login']); // Redirige a login si no está autenticado
     return false;
   }
 };

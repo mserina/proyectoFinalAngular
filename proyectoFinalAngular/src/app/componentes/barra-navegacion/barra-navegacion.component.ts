@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../reutilizar/moduloMaterial';
 import { Router, RouterModule } from '@angular/router';
 import { AuthServiceService } from '../../servicios/auth-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-barra-navegacion',
   standalone: true,
-  imports: [MaterialModule, RouterModule],
+  imports: [MaterialModule, RouterModule, CommonModule  ],
   templateUrl: './barra-navegacion.component.html',
   styleUrl: './barra-navegacion.component.css'
 })
@@ -14,7 +15,7 @@ export class BarraNavegacionComponent {
 
   mostrarMenu = false; // Inicialmente el menú está oculto
   private router = inject(Router);
-  private auth = inject(AuthServiceService);
+  public auth = inject(AuthServiceService);
 
   irARegistro() {
     const rutaActual = this.router.url; // Obtiene la ruta actual
@@ -36,8 +37,10 @@ export class BarraNavegacionComponent {
 
   irLogout() {
     this.auth.logout();
-    
   }
+
+  
+
 
   
 }
