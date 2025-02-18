@@ -23,7 +23,7 @@ mat-toolbar {
 .navOpciones {
     display: flex;
     gap: 12rem;
-    margin-left: -52rem;
+    margin-left: -32rem;
 }
 
 /* Botones de navegación */

@@ -39,7 +39,8 @@
         this.modificarForm.get('nuevoValor')?.setValue(value);
 
       });
-
+      
+      // Vacia los valores cuanod se cambia de campo
        this.modificarForm.get('campo')?.valueChanges.subscribe(value => {
         console.log('Campo seleccionado:', value);
         this.modificarForm.get('nuevoValor')?.setValue('');

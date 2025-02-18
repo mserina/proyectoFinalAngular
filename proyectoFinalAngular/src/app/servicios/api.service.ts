@@ -9,13 +9,8 @@ import { Usuario } from '../modelos/Usuario';
 })
 export class ApiService {
 
-  
-
-  
-
 // URL base de la API concatenada con el endpoint de usuarios
   private apiUrl = entorno.apiUrl + 'usuario'; 
-  
 
  // Inyección de dependencia para usar HttpClient
   private http = inject(HttpClient);
@@ -23,7 +18,6 @@ export class ApiService {
   constructor() { }
 
   
-
   /**
   * Obtiene la lista de todos los usuarios desde la API
   * @returns Observable<Usuario[]> - Un array de usuarios en formato observable
@@ -32,7 +26,6 @@ export class ApiService {
     
      console.log("Obteniendo usuarios desde el servicio...");
       return this.http.get<any[]>(`${this.apiUrl}/todos`); 
-    /* return of(this.usuarios); */
   }
 
 
@@ -91,7 +84,6 @@ export class ApiService {
    * @returns Observable<void> - Respuesta vacía si la eliminación fue exitosa
    */
   borrarUsuario(id: number): Observable<any> {
-    /* return of({ success: true }); */
     return this.http.delete<void>(`${this.apiUrl}/borrar/${id}`);
   }
 

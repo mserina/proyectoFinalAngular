@@ -1,4 +1,3 @@
-<app-barra-navegacion></app-barra-navegacion>
 <div class="contenedor-formulario">
   <form [formGroup]="miFormularioUsuario" (ngSubmit)="onSubmit()">
 
@@ -9,8 +8,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Nombre Completo</mat-label>
       <input matInput formControlName="nombreCompleto" placeholder="Introduce tu nombre completo">
-      <mat-error *ngIf="f.nombreCompleto?.hasError('required')">Este campo es obligatorio.</mat-error>
-      <mat-error *ngIf="f.nombreCompleto?.hasError('maxLength')">El nombre no puede tener más de 50 caracteres.</mat-error>
+      <mat-error *ngIf="validation.nombreCompleto?.hasError('required')">Este campo es obligatorio.</mat-error>
+      <mat-error *ngIf="validation.nombreCompleto?.hasError('maxLength')">El nombre no puede tener más de 50 caracteres.</mat-error>
     </mat-form-field>
 
 
@@ -18,16 +17,16 @@
     <mat-form-field appearance="fill">
       <mat-label>Teléfono Móvil</mat-label>
       <input matInput formControlName="movil" placeholder="Introduce tu teléfono móvil">
-      <mat-error *ngIf="f.movil?.hasError('required')">Este campo es obligatorio.</mat-error>
-      <mat-error *ngIf="f.movil?.hasError('pattern')">Formato de teléfono inválido.</mat-error>
+      <mat-error *ngIf="validation.movil?.hasError('required')">Este campo es obligatorio.</mat-error>
+      <mat-error *ngIf="validation.movil?.hasError('pattern')">Formato de teléfono inválido.</mat-error>
     </mat-form-field>
 
     <!-- Campo de Correo Electrónico -->
     <mat-form-field appearance="fill">
       <mat-label>Correo Electrónico</mat-label>
       <input matInput formControlName="correoElectronico" placeholder="Introduce tu correo electrónico">
-      <mat-error *ngIf="f.correoElectronico?.hasError('required')">Este campo es obligatorio.</mat-error>
-      <mat-error *ngIf="f.correoElectronico?.hasError('email')">Introduce un correo electrónico válido.</mat-error>
+      <mat-error *ngIf="validation.correoElectronico?.hasError('required')">Este campo es obligatorio.</mat-error>
+      <mat-error *ngIf="validation.correoElectronico?.hasError('email')">Introduce un correo electrónico válido.</mat-error>
     </mat-form-field>
 
 
@@ -38,7 +37,7 @@
         <mat-option value="admin">Administrador</mat-option>
         <mat-option value="usuario">Usuario</mat-option>
       </mat-select>
-      <mat-error *ngIf="f.tipoUsuario?.hasError('required')">Este campo es obligatorio.</mat-error>
+      <mat-error *ngIf="validation.tipoUsuario?.hasError('required')">Este campo es obligatorio.</mat-error>
     </mat-form-field>
 
 
@@ -46,8 +45,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Contraseña</mat-label>
       <input matInput type="password" formControlName="contrasena" placeholder="Introduce tu contraseña">
-      <mat-error *ngIf="f.contrasena?.hasError('required')">Este campo es obligatorio.</mat-error>
-      <mat-error *ngIf="f.contrasena?.hasError('minLength')">La contraseña debe tener al menos 6 caracteres.</mat-error>
+      <mat-error *ngIf="validation.contrasena?.hasError('required')">Este campo es obligatorio.</mat-error>
+      <mat-error *ngIf="validation.contrasena?.hasError('minLength')">La contraseña debe tener al menos 6 caracteres.</mat-error>
     </mat-form-field>
 
 

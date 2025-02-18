@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../../servicios/api.service';
 import {  MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FormularioModificarUsuarioComponent } from '../formulario-modificar-usuario/formulario-modificar-usuario.component';
@@ -10,7 +9,7 @@ import { FormularioModificarUsuarioComponent } from '../formulario-modificar-usu
 @Component({
   selector: 'app-lista-usuario',
   standalone: true,
-  imports: [MatTableModule, CommonModule, BarraNavegacionComponent],
+  imports: [MatTableModule, CommonModule],
   templateUrl: './lista-usuario.component.html',
   styleUrl: './lista-usuario.component.css',
 })
@@ -78,7 +77,6 @@ export class ListaUsuarioComponent implements OnInit {
   // Método para modificar usuario
   modificarUsuario(usuario: any): void {
     console.log('Usuario recibido en modificarUsuario:', usuario);
-    console.log('Correo electrónico:', usuario?.correoElectronico);
 
 
     // Abrimos el cuadro de diálogo para seleccionar el campo y el nuevo valor
@@ -89,17 +87,17 @@ export class ListaUsuarioComponent implements OnInit {
 
     // Cuando el diálogo se cierra, obtenemos el resultado
     dialogRef.afterClosed().subscribe(resultado => {
+
       // Si el usuario ha completado el formulario correctamente
       if (resultado) { 
         const { campo, nuevoValor } = resultado; // Obtenemos el campo y el nuevo valor ingresado
-
 
         // Llamamos al servicio para modificar el usuario
         this.servicioApi.modificarUsuario(usuario.correoElectronico, campo, nuevoValor).subscribe({
           next: () => {
             this._snackBar.open("Usuario modificado", 'Cerrar', { duration: 3000 });
           },
-          error: (error) => {
+          error: () => {
             this._snackBar.open("Error al modificar usuario", 'Cerrar', { duration: 3000 });
           }
         });

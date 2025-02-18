@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class AuthServiceService {
   private servicioApi = inject(ApiService); // Inyectamos el servicio API para obtener los usuarios
   private router = inject(Router); // Inyectamos el Router para navegar entre páginas
   private usuarioAutenticado: any; // Variable para almacenar el usuario autenticado
+  private snackBar = inject(MatSnackBar);
 
   constructor() {}
 
@@ -51,6 +53,7 @@ export class AuthServiceService {
    */
   logout() {
     console.log("usuario " + this.usuarioAutenticado + " eliminado");
+    this.snackBar.open(this.usuarioAutenticado.nombreCompleto + " ha cerrado sesion", 'Cerrar', { duration: 3000 }); 
     this.usuarioAutenticado = null; // Eliminamos el usuario autenticado
     localStorage.removeItem('usuario'); // Eliminamos la información del usuario del localStorage
     this.router.navigate(['/login']); // Redirigimos al login
@@ -62,11 +65,14 @@ export class AuthServiceService {
    * @returns boolean - `true` si hay un usuario autenticado, `false` si no lo hay
    */
   isAuthenticated(): boolean {
-    console.log("aqui esta gurdado, " + localStorage.getItem('usuario'));
+    console.log("Aqui esta guardado, " + localStorage.getItem('usuario'));
     return !!localStorage.getItem('usuario'); // Retorna `true` si hay un usuario en el localStorage
   }
   
-
+/**
+   * Método para verificar si hay un usuario autenticado
+   * @returns boolean - `true` si el usuario es admin, `false` si no lo es
+   */
   isAdmin(): boolean {
     const user = JSON.parse(localStorage.getItem('usuario') || '{}');
     return user && user.tipoUsuario === 'admin';  // Verifica si el tipo de usuario es admin  

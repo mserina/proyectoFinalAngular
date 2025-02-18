@@ -6,33 +6,30 @@ import { NgModule } from '@angular/core';
 
 
 // Modulos de Angular Material
-import { MatListModule } from '@angular/material/list';          // Para listas
-import { MatSelectModule } from '@angular/material/select';      // Para listas desplegables (select)
-import { MatInputModule } from '@angular/material/input';        // Para inputs de texto
-import { MatFormFieldModule } from '@angular/material/form-field'; // Para envolver los campos de formulario
-import { MatMenuModule } from '@angular/material/menu';          // Para menús (botones con opciones)
-import { MatButtonModule } from '@angular/material/button';      // Para los botones estilizados de Angular Material
+import { MatListModule } from '@angular/material/list';          
+import { MatSelectModule } from '@angular/material/select';      
+import { MatInputModule } from '@angular/material/input';       
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatMenuModule } from '@angular/material/menu';          
+import { MatButtonModule } from '@angular/material/button';      
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+
 
 
 
 // Definimos un array que contiene todos los módulos de Angular Material que vamos a usar
 const material = [
-  MatListModule,       // Módulo de listas
-  MatFormFieldModule,  // Módulo de campos de formulario
-  MatInputModule,      // Módulo de inputs
-  MatSelectModule,     // Módulo de listas desplegables
-  MatMenuModule,       // Módulo de menús
-  MatButtonModule,     // Módulo de botones
-  MatToolbarModule,     
-  MatDialogModule,
-  MatTableModule, 
-  MatPaginatorModule, 
-  MatSortModule
+  MatListModule,       // Módulo de listas para mostrar elementos en formato de lista
+  MatFormFieldModule,  // Módulo de campos de formulario, proporciona estilos y funcionalidades para inputs
+  MatInputModule,      // Módulo de inputs de Angular Material, permite capturar datos del usuario
+  MatSelectModule,     // Módulo de listas desplegables (select), permite seleccionar opciones predefinidas
+  MatMenuModule,       // Módulo de menús desplegables para la interfaz de usuario
+  MatButtonModule,     // Módulo de botones estilizados con Material Design
+  MatToolbarModule,    // Módulo de barras de herramientas, útil para encabezados y menús de navegación
+  MatDialogModule,     // Módulo para cuadros de diálogo modales (pop-ups)
+  MatTableModule,      // Módulo de tablas, permite mostrar datos en formato tabular
 ];
 
 

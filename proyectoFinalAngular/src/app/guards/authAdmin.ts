@@ -10,6 +10,7 @@ export class AdminGuard implements CanActivate {
   constructor(private authService: AuthServiceService, private router: Router) {}
 
   canActivate(): boolean {
+    
     // Verifica si el usuario está autenticado y si es administrador
     if (this.authService.isAuthenticated() && this.authService.isAdmin()) {
       return true;  // Si es admin y está autenticado, permite el acceso
