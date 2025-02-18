@@ -6,10 +6,12 @@
       <img class="logo" src="/imagenes/logo.png" alt="Logo" />
     </button>
 
+
     <!-- Menú hamburguesa para móviles -->
     <button class="menuHamburguesa" mat-icon-button (click)="mostrarMenu = !mostrarMenu">
       <h1 class="iconoHamburguesa">☰</h1>
     </button>
+
 
     <!-- Contenedor de los botones de navegación (oculto en móviles) -->
     <div class="navOpciones" [class.mostrar]="mostrarMenu">
@@ -24,6 +26,7 @@
       </button>
     </div>
 
+
     <!-- Icono del usuario -->
     <div class="iconoUsuario">
       <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -34,7 +37,6 @@
         <button mat-menu-item [routerLink]="'nuevo'">Registro</button>
         <button mat-menu-item [routerLink]="'login'">Login</button>
         <button mat-menu-item (click)="irLogout()">Logout</button>
-
       </mat-menu>
     </div>
 

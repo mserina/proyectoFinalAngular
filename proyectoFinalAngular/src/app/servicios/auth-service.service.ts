@@ -53,7 +53,7 @@ export class AuthServiceService {
     console.log("usuario " + this.usuarioAutenticado + " eliminado");
     this.usuarioAutenticado = null; // Eliminamos el usuario autenticado
     localStorage.removeItem('usuario'); // Eliminamos la información del usuario del localStorage
-    this.router.navigate(['login']); // Redirigimos al login
+    this.router.navigate(['/login']); // Redirigimos al login
   }
 
 

@@ -1,4 +1,6 @@
 /* --- ESTILOS GENERALES --- */
+
+/* Estilos para la barra de herramientas (mat-toolbar) */
 mat-toolbar {
     background-color: black;
     height: 5rem;
@@ -43,6 +45,7 @@ mat-toolbar {
     transform: translateY(-8px);
 }
 
+/* Animacion del icono del usuario*/
 .imagenLogin:hover {
     transform: scale(1.1);
 }
@@ -53,6 +56,7 @@ h2 {
     font-size: 1.2rem;
 }
 
+/* Para ocultar el icono del menu hamburguesa */
 .iconoHamburguesa{
     display: none;
 }
@@ -64,7 +68,6 @@ h2 {
     .navOpciones {
         gap: 5rem; /* Reduce el espacio entre los botones */
         margin-left: -22rem;
-
     }
 
     .logo {
@@ -105,8 +108,6 @@ h2 {
         cursor: pointer;
         margin-left: 1rem;
     }
-
-
 
     /* Ocultar el menú de navegación por defecto */
     .navOpciones {
