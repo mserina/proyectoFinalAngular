@@ -13,13 +13,13 @@
 
     <!-- Contenedor de los botones de navegación (oculto en móviles) -->
     <div class="navOpciones" [class.mostrar]="mostrarMenu">
-      <button class="ico1" mat-icon-button>
+      <button class="ico1" mat-icon-button [routerLink]="'manga'">
         <h2>MANGA</h2>
       </button>
-      <button class="ico2" mat-icon-button>
+      <button class="ico2" mat-icon-button [routerLink]="'poster'">
         <h2>POSTER</h2>
       </button>
-      <button class="ico3" mat-icon-button>
+      <button class="ico3" mat-icon-button [routerLink]="'figura'">
         <h2>FIGURA</h2>
       </button>
     </div>
