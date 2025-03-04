@@ -19,8 +19,6 @@ export class FormularioUsuarioComponent {
     private formBuilder = inject(FormBuilder);
     private servicioApi = inject(ApiService);
 
-    
-
 
     // Inicializamos el formulario con validaciones
     miFormularioUsuario = this.formBuilder.group({
@@ -66,7 +64,7 @@ export class FormularioUsuarioComponent {
 
     
     // Método para obtener las validaciones de cada campo
-    get f() {
+    get validation() {
       return this.miFormularioUsuario.controls;
     }
 }

@@ -1,5 +1,5 @@
-import { Component, inject, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from '../../../reutilizar/moduloMaterial';
 import { CommonModule } from '@angular/common'; // Necesario para pipes como titlecase
@@ -13,69 +13,74 @@ import { CommonModule } from '@angular/common'; // Necesario para pipes como tit
 })
 export class FormularioModificarUsuarioComponent {
 
-    modificarForm: FormGroup; // Formulario reactivo para el diálogo
-    camposDisponibles = ['nombre_completo', 'movil', 'correo_electronico', 'contrasena', 'tipo_usuario']; // Los campos que se pueden modificar
+  modificarForm: FormGroup; // Formulario reactivo para el diálogo
+  camposDisponibles = ['nombre_completo', 'movil', 'correo_electronico', 'contrasena', 'tipo_usuario']; // Los campos que se pueden modificar
 
-
-    // Inyección con la función inject()
-    private formBuilder = inject(FormBuilder);
-    private dialogoModificar = inject(MatDialogRef<FormularioModificarUsuarioComponent>);
-    private data = inject(MAT_DIALOG_DATA);
-
+  // Inyección con la función inject()
+  private formBuilder = inject(FormBuilder);
+  private dialogoModificar = inject(MatDialogRef<FormularioModificarUsuarioComponent>);
+  private data = inject(MAT_DIALOG_DATA);
 
   constructor() {
     console.log('Datos recibidos en el diálogo:', this.data); // Verificar qué datos llegan
 
     // Inicialización del formulario reactivo con validaciones
     this.modificarForm = this.formBuilder.group({
-        campo: ['', Validators.required], // El campo a modificar
-        nuevoValor: ['', Validators.required], // El nuevo valor que se asignará al campo
-        tipo_usuario: ['', Validators.required] // Campo para el "tipo de usuario"
+      campo: ['', Validators.required], // El campo a modificar
+      nuevoValor: ['', Validators.required], // El nuevo valor que se asignará al campo
+      tipo_usuario: [''] // Campo para el "tipo de usuario"
     });
 
     // Escuchar cambios en tipo_usuario para asegurarnos de que se guarda
     this.modificarForm.get('tipo_usuario')?.valueChanges.subscribe(value => {
       console.log('Tipo de usuario seleccionado:', value);
       this.modificarForm.get('nuevoValor')?.setValue(value);
+    });
 
+    // Vacía el campo "nuevoValor" cuando se cambia el campo seleccionado
+    this.modificarForm.get('campo')?.valueChanges.subscribe(() => {
+      this.modificarForm.get('nuevoValor')?.setValue('');
+      this.aplicarValidaciones(); // Aplicar nuevas validaciones según el campo seleccionado
     });
   }
 
+  // Método que usa validaciones concretas dependiendo del campo que se quiera modificar
+  aplicarValidaciones() {
+    const campoSeleccionado = this.modificarForm.get('campo')?.value;
+    const nuevoValorControl = this.modificarForm.get('nuevoValor');
 
-//Metodo que usa valdiaciones concretas dependiendo del campo que se quiera modificar
-aplicarValidaciones() {
-  const campoSeleccionado = this.modificarForm.get('campo')?.value;
-  const nuevoValorControl = this.modificarForm.get('nuevoValor');
-  console.log(campoSeleccionado);
+    if (!nuevoValorControl) return;
 
-  // Reseteamos las validaciones previas
-  nuevoValorControl?.clearValidators();
+    console.log('Campo seleccionado:', campoSeleccionado);
 
-  // Aplicamos validaciones según el campo seleccionado
-  switch (campoSeleccionado) {
-    case 'nombre_completo':
-      nuevoValorControl?.setValidators([Validators.required, Validators.maxLength(50)]);
-      break;
-    case 'movil':
-      nuevoValorControl?.setValidators([Validators.required, Validators.pattern(/^(\+34|0034|34)?[6-9]\d{8}$/)]);
-      break;
-    case 'correo_electronico':
-      nuevoValorControl?.setValidators([Validators.required, Validators.email]);
-      break;
-    case 'contrasena':
-      nuevoValorControl?.setValidators([Validators.required, Validators.minLength(6)]);
-      break;
-    case 'tipo_usuario':
-      console.log('Tipo de usuario (validaciones) seleccionado:', nuevoValorControl);
-      nuevoValorControl?.setValidators([Validators.required]);
-      break;
-    default:
-      nuevoValorControl?.setValidators([Validators.required]);
+    // Reseteamos las validaciones previas
+    nuevoValorControl.clearValidators();
+
+    // Aplicamos validaciones según el campo seleccionado
+    switch (campoSeleccionado) {
+      case 'nombre_completo':
+        nuevoValorControl.setValidators([Validators.required, Validators.maxLength(50)]);
+        break;
+      case 'movil':
+        nuevoValorControl.setValidators([Validators.required, Validators.pattern(/^(\+34|0034|34)?[6-9]\d{8}$/)]);
+        break;
+      case 'correo_electronico':
+        nuevoValorControl.setValidators([Validators.required, Validators.email]);
+        break;
+      case 'contrasena':
+        nuevoValorControl.setValidators([Validators.required, Validators.minLength(6)]);
+        break;
+      case 'tipo_usuario':
+        console.log('Tipo de usuario (validaciones) seleccionado:', nuevoValorControl);
+        nuevoValorControl.setValidators([Validators.required]);
+        break;
+      default:
+        nuevoValorControl.setValidators([Validators.required]);
+    }
+
+    // Actualiza la validación
+    nuevoValorControl.updateValueAndValidity();
   }
-  
-  //Actualiza la validacion
-  nuevoValorControl?.updateValueAndValidity();
-}
 
   // Método para confirmar la modificación y cerrar el diálogo
   confirmar(): void {
@@ -89,5 +94,4 @@ aplicarValidaciones() {
   cancelar(): void {
     this.dialogoModificar.close();
   }
-
 }

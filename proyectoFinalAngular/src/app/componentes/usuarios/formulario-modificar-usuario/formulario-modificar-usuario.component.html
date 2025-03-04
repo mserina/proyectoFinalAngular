@@ -47,7 +47,5 @@
 <!-- Botones de acción en el pie del diálogo -->
 <div mat-dialog-actions>
   <button mat-button (click)="cancelar()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="true" (click)="confirmar()" [disabled]="modificarForm.invalid">
-    Confirmar
-  </button>
+  <button mat-button [mat-dialog-close]="true" (click)="confirmar()" [disabled]="modificarForm.invalid">Confirmar</button>
 </div>
