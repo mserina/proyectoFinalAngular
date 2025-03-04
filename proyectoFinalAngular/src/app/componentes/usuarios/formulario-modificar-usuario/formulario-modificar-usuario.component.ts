@@ -29,6 +29,7 @@ export class FormularioModificarUsuarioComponent {
       campo: ['', Validators.required], // El campo a modificar
       nuevoValor: ['', Validators.required], // El nuevo valor que se asignará al campo
       tipo_usuario: [''] // Campo para el "tipo de usuario"
+
     });
 
     // Escuchar cambios en tipo_usuario para asegurarnos de que se guarda

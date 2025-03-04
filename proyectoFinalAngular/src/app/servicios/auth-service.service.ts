@@ -13,6 +13,7 @@ export class AuthServiceService {
   private usuarioAutenticado: any; // Variable para almacenar el usuario autenticado
   private snackBar = inject(MatSnackBar);
 
+
   constructor() {}
 
   /**
@@ -51,13 +52,20 @@ export class AuthServiceService {
   /**
    * Método para cerrar sesión
    */
-  logout() {
-    console.log("usuario " + this.usuarioAutenticado + " eliminado");
-    this.snackBar.open(this.usuarioAutenticado.nombreCompleto + " ha cerrado sesion", 'Cerrar', { duration: 3000 }); 
+
+  logout() {  
+  if (this.isAuthenticated()) { // Verifica si hay una sesión activa
+    this.snackBar.open("✅ Cierre de sesión exitoso. Usuario eliminado: " + this.usuarioAutenticado, 'Cerrar', { duration: 3000 });
+
     this.usuarioAutenticado = null; // Eliminamos el usuario autenticado
     localStorage.removeItem('usuario'); // Eliminamos la información del usuario del localStorage
-    this.router.navigate(['/login']); // Redirigimos al login
+    this.router.navigate(['login']); // Redirigimos al login
+  } else {
+    console.log("⚠️ No hay sesión activa para cerrar.");
+    this.snackBar.open("⚠️ No hay sesión activa para cerrar.", 'Cerrar', { duration: 3000 });
   }
+}
+
 
 
   /**
