@@ -35,7 +35,6 @@ export class LoginUsuarioComponent {
   mandarDatos() { 
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value; // Obtener valores del formulario
-
       this.auth.login(email, password).then(success => {
         if (!success) {
           console.log('❌ Credenciales incorrectas');
