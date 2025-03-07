@@ -30,17 +30,6 @@
     </mat-form-field>
 
 
-    <!-- Campo de Tipo de Usuario -->
-    <mat-form-field appearance="fill">
-      <mat-label>Tipo de Usuario</mat-label>
-      <mat-select formControlName="tipoUsuario">
-        <mat-option value="admin">Administrador</mat-option>
-        <mat-option value="usuario">Usuario</mat-option>
-      </mat-select>
-      <mat-error *ngIf="validation.tipoUsuario?.hasError('required')">Este campo es obligatorio.</mat-error>
-    </mat-form-field>
-
-
     <!-- Campo de Contraseña -->
     <mat-form-field appearance="fill">
       <mat-label>Contraseña</mat-label>

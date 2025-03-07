@@ -2,14 +2,16 @@ import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../../reutilizar/moduloMaterial';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BarraNavegacionComponent } from "../../barra-navegacion/barra-navegacion.component";
 import { ApiService } from '../../../servicios/api.service';
 import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../modelos/Usuario';
+import { AuthServiceService } from '../../../servicios/auth-service.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-formulario-usuario',
   standalone: true,
-  imports: [MaterialModule, ReactiveFormsModule, BarraNavegacionComponent, CommonModule],
+  imports: [MaterialModule, ReactiveFormsModule, CommonModule],
   templateUrl: './formulario-usuario.component.html',
   styleUrl: './formulario-usuario.component.css'
 })
@@ -18,16 +20,19 @@ export class FormularioUsuarioComponent {
     private _snackBar = inject(MatSnackBar);
     private formBuilder = inject(FormBuilder);
     private servicioApi = inject(ApiService);
+    private router = inject(Router); // Inyectamos el Router para navegar entre páginas
 
+    
 
     // Inicializamos el formulario con validaciones
     miFormularioUsuario = this.formBuilder.group({
       nombreCompleto: ['', [Validators.required, Validators.maxLength(50)]],  // Nombre requerido, máximo 50 caracteres
       movil: ['', [Validators.required, Validators.pattern(/^(\+34|0034|34)?[6-9]\d{8}$/)]], // Validación para teléfono
       correoElectronico: ['', [Validators.required, Validators.email]],  // Correo electrónico requerido
-      tipoUsuario: ['', Validators.required],  // Tipo de usuario requerido
+      tipoUsuario: [],  
       contrasena: ['', [Validators.required, Validators.minLength(6)]], // Contraseña mínima de 6 caracteres
     });
+  
   
 
     // Método para comprobar si el formulario es válido y enviarlo al API
@@ -44,11 +49,15 @@ export class FormularioUsuarioComponent {
           foto: 'default.jpg', // Se asigna una imagen por defecto
         };
 
+        
+        
+
         // Llamar al servicio para crear un nuevo usuario
         this.servicioApi.crearNuevoUsuario(nuevoUsuario).subscribe({
           next: () => {
             this._snackBar.open('Usuario Agregado', 'Cerrar', { duration: 3000 }); 
             this.miFormularioUsuario.reset(); // Resetear el formulario tras el registro
+            this.router.navigate(['login']);
           },
           error: (error) => {
             this._snackBar.open('Error al crear el usuario', 'Cerrar', { duration: 3000 });
